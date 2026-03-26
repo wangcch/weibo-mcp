@@ -26,6 +26,10 @@
   ],
   "author": "wangcch",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangcch/weibo-mcp.git"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
