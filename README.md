@@ -47,6 +47,28 @@ npm install -g weibo-mcp
 ### 配置 MCP 客户端
 
 <details>
+<summary><b>VS Code</b></summary>
+
+添加到 `.vscode/mcp.json`：
+
+```json
+{
+  "servers": {
+    "weibo": {
+      "command": "npx",
+      "args": ["weibo-mcp"],
+      "env": {
+        "WEIBO_APP_ID": "your_app_id",
+        "WEIBO_APP_SECRET": "your_app_secret"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
 <summary><b>Cursor</b></summary>
 
 添加到 `.cursor/mcp.json`：
