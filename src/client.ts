@@ -15,16 +15,6 @@ type TokenCache = {
   expiresIn: number;
 };
 
-const CATEGORY_MAP: Record<string, string> = {
-  主榜: "v_openclaw",
-  文娱榜: "v_openclaw_ent",
-  社会榜: "v_openclaw_social",
-  生活榜: "v_openclaw_live",
-  acg榜: "v_openclaw_acg",
-  科技榜: "v_openclaw_tech",
-  体育榜: "v_openclaw_sport",
-};
-
 export class WeiboApiClient {
   private tokenCache: TokenCache | null = null;
   private tokenPromise: Promise<TokenCache> | null = null;
@@ -142,11 +132,10 @@ export class WeiboApiClient {
 
   async getHotSearch(category: string, count?: number): Promise<WeiboHotSearchApiResponse> {
     const token = (await this.getToken()).token;
-    const mappedCategory = CATEGORY_MAP[category] ?? category;
 
     const url = new URL(this.config.hotSearchEndpoint);
     url.searchParams.set("token", token);
-    url.searchParams.set("category", mappedCategory);
+    url.searchParams.set("category", category);
     if (typeof count === "number") {
       url.searchParams.set("count", String(count));
     }
