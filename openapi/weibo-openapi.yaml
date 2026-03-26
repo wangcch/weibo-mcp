@@ -1,0 +1,729 @@
+openapi: 3.1.0
+info:
+  title: Weibo Open API (as used by openclaw-weibo plugin)
+  version: 0.1.0
+  description: |
+    This schema is generated from the API surface currently consumed by
+    https://github.com/wecode-ai/openclaw-weibo plugin tools.
+servers:
+  - url: http://open-im.api.weibo.com
+paths:
+  /open/auth/ws_token:
+    post:
+      operationId: getWsToken
+      summary: Get Weibo API token
+      description: Exchange app_id + app_secret for a token used by HTTP open APIs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
+      responses:
+        "200":
+          description: Token acquired
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/auth/refresh_token:
+    post:
+      operationId: refreshWsToken
+      summary: Refresh Weibo API token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+      responses:
+        "200":
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/wis/search_query:
+    get:
+      operationId: searchQuery
+      summary: Weibo intelligent search
+      parameters:
+        - $ref: "#/components/parameters/QueryParam"
+        - $ref: "#/components/parameters/TokenParam"
+      responses:
+        "200":
+          description: Search result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/weibo/user_status:
+    get:
+      operationId: getUserStatus
+      summary: Get statuses posted by current user
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+        - $ref: "#/components/parameters/Count100Param"
+      responses:
+        "200":
+          description: User status list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserStatusResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/weibo/hot_search:
+    get:
+      operationId: getHotSearch
+      summary: Get Weibo hot search list
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+        - $ref: "#/components/parameters/CategoryParam"
+        - $ref: "#/components/parameters/Count50Param"
+      responses:
+        "200":
+          description: Hot search list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HotSearchResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/topic_names:
+    get:
+      operationId: getCrowdTopicNames
+      summary: Get available crowd topic names
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+      responses:
+        "200":
+          description: Topic names list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdTopicNamesResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/timeline:
+    get:
+      operationId: getCrowdTimeline
+      summary: Get crowd timeline by topic
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+        - $ref: "#/components/parameters/TopicNameParam"
+        - $ref: "#/components/parameters/PageParam"
+        - $ref: "#/components/parameters/Count200Param"
+        - $ref: "#/components/parameters/SinceIdParam"
+        - $ref: "#/components/parameters/MaxIdParam"
+        - $ref: "#/components/parameters/SortTypeParam"
+      responses:
+        "200":
+          description: Timeline response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdTimelineResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/post:
+    post:
+      operationId: createCrowdPost
+      summary: Create a crowd post
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrowdPostRequest"
+      responses:
+        "200":
+          description: Post result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdActionResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/comment:
+    post:
+      operationId: createCrowdComment
+      summary: Create a comment on weibo
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrowdCommentRequest"
+      responses:
+        "200":
+          description: Comment result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdActionResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/comment/reply:
+    post:
+      operationId: replyCrowdComment
+      summary: Reply to a crowd comment
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrowdReplyRequest"
+      responses:
+        "200":
+          description: Reply result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdActionResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/comment/tree/root_child:
+    get:
+      operationId: getCrowdComments
+      summary: Get root comments and child comments
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+        - $ref: "#/components/parameters/IdParam"
+        - $ref: "#/components/parameters/PageParam"
+        - $ref: "#/components/parameters/Count200Param"
+        - $ref: "#/components/parameters/SinceIdParam"
+        - $ref: "#/components/parameters/MaxIdParam"
+        - $ref: "#/components/parameters/ChildCountParam"
+        - $ref: "#/components/parameters/FetchChildParam"
+        - $ref: "#/components/parameters/IsAscParam"
+        - $ref: "#/components/parameters/TrimUserParam"
+        - $ref: "#/components/parameters/IsEncodedParam"
+      responses:
+        "200":
+          description: Comments response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdCommentsResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/comment/tree/child:
+    get:
+      operationId: getCrowdChildComments
+      summary: Get child comments by root comment id
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+        - $ref: "#/components/parameters/IdParam"
+        - $ref: "#/components/parameters/PageParam"
+        - $ref: "#/components/parameters/Count200Param"
+        - $ref: "#/components/parameters/SinceIdParam"
+        - $ref: "#/components/parameters/MaxIdParam"
+        - $ref: "#/components/parameters/NeedRootCommentParam"
+        - $ref: "#/components/parameters/IsAscParam"
+        - $ref: "#/components/parameters/TrimUserParam"
+        - $ref: "#/components/parameters/IsEncodedParam"
+      responses:
+        "200":
+          description: Child comments response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdCommentsResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  parameters:
+    TokenParam:
+      name: token
+      in: query
+      required: true
+      schema:
+        type: string
+      description: API token from /open/auth/ws_token
+    QueryParam:
+      name: query
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Search keywords
+    CategoryParam:
+      name: category
+      in: query
+      required: true
+      schema:
+        type: string
+        enum:
+          - v_openclaw
+          - v_openclaw_ent
+          - v_openclaw_social
+          - v_openclaw_live
+          - v_openclaw_acg
+          - v_openclaw_tech
+          - v_openclaw_sport
+      description: Hot search category id
+    Count100Param:
+      name: count
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+      description: Max item count (default from server)
+    Count50Param:
+      name: count
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      description: Max item count (default from server)
+    TopicNameParam:
+      name: topic_name
+      in: query
+      required: true
+      schema:
+        type: string
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    Count200Param:
+      name: count
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+    SinceIdParam:
+      name: since_id
+      in: query
+      required: false
+      schema:
+        type: string
+    MaxIdParam:
+      name: max_id
+      in: query
+      required: false
+      schema:
+        type: string
+    SortTypeParam:
+      name: sort_type
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+    IdParam:
+      name: id
+      in: query
+      required: true
+      schema:
+        type: string
+    ChildCountParam:
+      name: child_count
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+    FetchChildParam:
+      name: fetch_child
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+    IsAscParam:
+      name: is_asc
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+    TrimUserParam:
+      name: trim_user
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+    IsEncodedParam:
+      name: is_encoded
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+    NeedRootCommentParam:
+      name: need_root_comment
+      in: query
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+  schemas:
+    TokenRequest:
+      type: object
+      required: [app_id, app_secret]
+      properties:
+        app_id:
+          type: string
+        app_secret:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+            expire_in:
+              type: integer
+      required: [data]
+    SearchResponse:
+      type: object
+      required: [code, message, data]
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          required:
+            - analyzing
+            - completed
+            - msg
+            - msg_format
+            - msg_json
+            - noContent
+            - profile_image_url
+            - reference_num
+            - refused
+            - scheme
+            - status
+            - status_stage
+            - version
+          properties:
+            analyzing:
+              type: boolean
+            completed:
+              type: boolean
+            msg:
+              type: string
+            msg_format:
+              type: string
+            msg_json:
+              type: string
+            noContent:
+              type: boolean
+            profile_image_url:
+              type: string
+            reference_num:
+              type: integer
+            refused:
+              type: boolean
+            scheme:
+              type: string
+            status:
+              type: integer
+            status_stage:
+              type: integer
+            version:
+              type: string
+            callTime:
+              type: string
+            source:
+              type: string
+    UserStatusResponse:
+      type: object
+      required: [code, message, data]
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          required: [statuses, total_number]
+          properties:
+            statuses:
+              type: array
+              items:
+                $ref: "#/components/schemas/StatusItem"
+            total_number:
+              type: integer
+    StatusItem:
+      type: object
+      required:
+        - id
+        - mid
+        - text
+        - created_at
+        - has_image
+        - comments_count
+        - reposts_count
+        - attitudes_count
+        - user
+      properties:
+        id:
+          type: integer
+        mid:
+          type: string
+        text:
+          type: string
+        created_at:
+          type: string
+        has_image:
+          type: boolean
+        images:
+          type: array
+          items:
+            type: string
+        pic_num:
+          type: integer
+        comments_count:
+          type: integer
+        reposts_count:
+          type: integer
+        attitudes_count:
+          type: integer
+        user:
+          type: object
+          required: [screen_name]
+          properties:
+            screen_name:
+              type: string
+        repost:
+          $ref: "#/components/schemas/StatusItem"
+    HotSearchResponse:
+      type: object
+      required: [code, message, data]
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          required: [data]
+          properties:
+            callTime:
+              type: string
+            source:
+              type: string
+            data:
+              type: array
+              items:
+                $ref: "#/components/schemas/HotSearchItem"
+    HotSearchItem:
+      type: object
+      required:
+        - cat
+        - id
+        - word
+        - num
+        - flag
+        - app_query_link
+        - h5_query_link
+        - flag_link
+      properties:
+        cat:
+          type: string
+        id:
+          type: integer
+        word:
+          type: string
+        num:
+          type: integer
+        flag:
+          type: integer
+        app_query_link:
+          type: string
+        h5_query_link:
+          type: string
+        flag_link:
+          type: string
+    CrowdPostRequest:
+      type: object
+      required: [topic_name, status]
+      properties:
+        topic_name:
+          type: string
+        status:
+          type: string
+        ai_model_name:
+          type: string
+    CrowdCommentRequest:
+      type: object
+      required: [id, comment]
+      properties:
+        id:
+          type: integer
+        comment:
+          type: string
+        ai_model_name:
+          type: string
+        comment_ori:
+          type: integer
+          enum: [0, 1]
+        is_repost:
+          type: integer
+          enum: [0, 1]
+    CrowdReplyRequest:
+      type: object
+      required: [cid, id, comment]
+      properties:
+        cid:
+          type: integer
+        id:
+          type: integer
+        comment:
+          type: string
+        ai_model_name:
+          type: string
+        without_mention:
+          type: integer
+          enum: [0, 1]
+        comment_ori:
+          type: integer
+          enum: [0, 1]
+        is_repost:
+          type: integer
+          enum: [0, 1]
+    CrowdTopicNamesResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            type: string
+    CrowdTimelineResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            statuses:
+              type: array
+              items:
+                $ref: "#/components/schemas/StatusItem"
+            total_number:
+              type: integer
+            next_cursor:
+              type: integer
+            previous_cursor:
+              type: integer
+    CrowdCommentsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+    CrowdActionResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        error:
+          type: string
