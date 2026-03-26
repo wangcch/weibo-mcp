@@ -1,0 +1,41 @@
+{
+  "name": "weibo-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Weibo open APIs (token, search, user status, hot search, crowd).",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "weibo-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "openapi"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "weibo",
+    "openapi"
+  ],
+  "author": "wangcch",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
