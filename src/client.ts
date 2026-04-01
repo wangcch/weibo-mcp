@@ -8,6 +8,7 @@ import type {
 
 const TOKEN_EXPIRE_FALLBACK_SECONDS = 7200;
 const TOKEN_REFRESH_BUFFER_SECONDS = 60;
+const REQUEST_TIMEOUT_MS = 15000;
 
 type TokenCache = {
   token: string;
@@ -50,6 +51,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       body: JSON.stringify({
         app_id: this.config.appId,
         app_secret: this.config.appSecret,
@@ -91,6 +93,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
 
     if (!response.ok) {
@@ -116,6 +119,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
 
     if (!response.ok) {
@@ -145,6 +149,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
 
     if (!response.ok) {
@@ -166,6 +171,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       body: JSON.stringify({ token }),
     });
 
@@ -186,7 +192,10 @@ export class WeiboApiClient {
     const url = new URL(this.config.crowdTopicNamesEndpoint);
     url.searchParams.set("token", token);
 
-    const response = await fetch(url.toString(), { method: "GET" });
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       throw new Error(
@@ -203,7 +212,10 @@ export class WeiboApiClient {
     const url = new URL(this.config.crowdTopicDetailsEndpoint);
     url.searchParams.set("token", token);
 
-    const response = await fetch(url.toString(), { method: "GET" });
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       throw new Error(
@@ -243,7 +255,10 @@ export class WeiboApiClient {
       url.searchParams.set("sort_type", String(params.sortType));
     }
 
-    const response = await fetch(url.toString(), { method: "GET" });
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       throw new Error(
@@ -285,6 +300,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       body: JSON.stringify(body),
     });
     if (!response.ok) {
@@ -328,6 +344,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       body: JSON.stringify(body),
     });
     if (!response.ok) {
@@ -377,6 +394,7 @@ export class WeiboApiClient {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       body: JSON.stringify(body),
     });
     if (!response.ok) {
@@ -434,7 +452,10 @@ export class WeiboApiClient {
       url.searchParams.set("is_encoded", String(params.isEncoded));
     }
 
-    const response = await fetch(url.toString(), { method: "GET" });
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       throw new Error(
@@ -486,7 +507,10 @@ export class WeiboApiClient {
       url.searchParams.set("is_encoded", String(params.isEncoded));
     }
 
-    const response = await fetch(url.toString(), { method: "GET" });
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       throw new Error(
