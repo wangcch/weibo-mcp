@@ -1,7 +1,11 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { createRequire } from "node:module";
 import { z } from "zod";
 import { WeiboApiClient } from "./client.js";
 import { loadConfig } from "./config.js";
+
+const require = createRequire(import.meta.url);
+const { version: serverVersion } = require("../package.json") as { version: string };
 
 function toTextResult(data: unknown) {
   return {
@@ -16,7 +20,7 @@ export function createServer(): McpServer {
   const server = new McpServer(
     {
       name: "weibo-mcp",
-      version: "0.1.0",
+      version: serverVersion,
     },
     {
       capabilities: {
