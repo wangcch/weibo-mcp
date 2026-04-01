@@ -202,21 +202,21 @@ npx weibo-mcp
 <details>
 <summary>查看所有接口地址变量</summary>
 
-| 环境变量                              | 默认值                                                            |
-| ------------------------------------- | ----------------------------------------------------------------- |
-| `WEIBO_TOKEN_ENDPOINT`                | `http://open-im.api.weibo.com/open/auth/ws_token`                 |
-| `WEIBO_REFRESH_TOKEN_ENDPOINT`        | `http://open-im.api.weibo.com/open/auth/refresh_token`            |
-| `WEIBO_SEARCH_ENDPOINT`               | `http://open-im.api.weibo.com/open/wis/search_query`              |
-| `WEIBO_STATUS_ENDPOINT`               | `http://open-im.api.weibo.com/open/weibo/user_status`             |
-| `WEIBO_HOT_SEARCH_ENDPOINT`           | `http://open-im.api.weibo.com/open/weibo/hot_search`              |
-| `WEIBO_CROWD_TOPIC_NAMES_ENDPOINT`    | `http://open-im.api.weibo.com/open/crowd/topic_names`             |
-| `WEIBO_CROWD_TOPIC_DETAILS_ENDPOINT`  | `http://open-im.api.weibo.com/open/crowd/topic_details`           |
-| `WEIBO_CROWD_TIMELINE_ENDPOINT`       | `http://open-im.api.weibo.com/open/crowd/timeline`                |
-| `WEIBO_CROWD_POST_ENDPOINT`           | `http://open-im.api.weibo.com/open/crowd/post`                    |
-| `WEIBO_CROWD_COMMENT_ENDPOINT`        | `http://open-im.api.weibo.com/open/crowd/comment`                 |
-| `WEIBO_CROWD_REPLY_ENDPOINT`          | `http://open-im.api.weibo.com/open/crowd/comment/reply`           |
-| `WEIBO_CROWD_COMMENTS_ENDPOINT`       | `http://open-im.api.weibo.com/open/crowd/comment/tree/root_child` |
-| `WEIBO_CROWD_CHILD_COMMENTS_ENDPOINT` | `http://open-im.api.weibo.com/open/crowd/comment/tree/child`      |
+| 环境变量                              | 默认值                                                             |
+| ------------------------------------- | ------------------------------------------------------------------ |
+| `WEIBO_TOKEN_ENDPOINT`                | `https://open-im.api.weibo.com/open/auth/ws_token`                 |
+| `WEIBO_REFRESH_TOKEN_ENDPOINT`        | `https://open-im.api.weibo.com/open/auth/refresh_token`            |
+| `WEIBO_SEARCH_ENDPOINT`               | `https://open-im.api.weibo.com/open/wis/search_query`              |
+| `WEIBO_STATUS_ENDPOINT`               | `https://open-im.api.weibo.com/open/weibo/user_status`             |
+| `WEIBO_HOT_SEARCH_ENDPOINT`           | `https://open-im.api.weibo.com/open/weibo/hot_search`              |
+| `WEIBO_CROWD_TOPIC_NAMES_ENDPOINT`    | `https://open-im.api.weibo.com/open/crowd/topic_names`             |
+| `WEIBO_CROWD_TOPIC_DETAILS_ENDPOINT`  | `https://open-im.api.weibo.com/open/crowd/topic_details`           |
+| `WEIBO_CROWD_TIMELINE_ENDPOINT`       | `https://open-im.api.weibo.com/open/crowd/timeline`                |
+| `WEIBO_CROWD_POST_ENDPOINT`           | `https://open-im.api.weibo.com/open/crowd/post`                    |
+| `WEIBO_CROWD_COMMENT_ENDPOINT`        | `https://open-im.api.weibo.com/open/crowd/comment`                 |
+| `WEIBO_CROWD_REPLY_ENDPOINT`          | `https://open-im.api.weibo.com/open/crowd/comment/reply`           |
+| `WEIBO_CROWD_COMMENTS_ENDPOINT`       | `https://open-im.api.weibo.com/open/crowd/comment/tree/root_child` |
+| `WEIBO_CROWD_CHILD_COMMENTS_ENDPOINT` | `https://open-im.api.weibo.com/open/crowd/comment/tree/child`      |
 
 </details>
 

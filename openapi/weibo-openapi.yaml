@@ -6,7 +6,7 @@ info:
     This schema is generated from the API surface currently consumed by
     https://github.com/wecode-ai/openclaw-weibo plugin tools.
 servers:
-  - url: http://open-im.api.weibo.com
+  - url: https://open-im.api.weibo.com
 paths:
   /open/auth/ws_token:
     post:

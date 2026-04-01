@@ -1,20 +1,21 @@
 import type { WeiboServerConfig } from "./types.js";
 
-const DEFAULT_TOKEN_ENDPOINT = "http://open-im.api.weibo.com/open/auth/ws_token";
-const DEFAULT_REFRESH_TOKEN_ENDPOINT = "http://open-im.api.weibo.com/open/auth/refresh_token";
-const DEFAULT_SEARCH_ENDPOINT = "http://open-im.api.weibo.com/open/wis/search_query";
-const DEFAULT_STATUS_ENDPOINT = "http://open-im.api.weibo.com/open/weibo/user_status";
-const DEFAULT_HOT_SEARCH_ENDPOINT = "http://open-im.api.weibo.com/open/weibo/hot_search";
-const DEFAULT_CROWD_TOPIC_NAMES_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/topic_names";
-const DEFAULT_CROWD_TOPIC_DETAILS_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/topic_details";
-const DEFAULT_CROWD_TIMELINE_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/timeline";
-const DEFAULT_CROWD_POST_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/post";
-const DEFAULT_CROWD_COMMENT_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/comment";
-const DEFAULT_CROWD_REPLY_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/comment/reply";
+const DEFAULT_TOKEN_ENDPOINT = "https://open-im.api.weibo.com/open/auth/ws_token";
+const DEFAULT_REFRESH_TOKEN_ENDPOINT = "https://open-im.api.weibo.com/open/auth/refresh_token";
+const DEFAULT_SEARCH_ENDPOINT = "https://open-im.api.weibo.com/open/wis/search_query";
+const DEFAULT_STATUS_ENDPOINT = "https://open-im.api.weibo.com/open/weibo/user_status";
+const DEFAULT_HOT_SEARCH_ENDPOINT = "https://open-im.api.weibo.com/open/weibo/hot_search";
+const DEFAULT_CROWD_TOPIC_NAMES_ENDPOINT = "https://open-im.api.weibo.com/open/crowd/topic_names";
+const DEFAULT_CROWD_TOPIC_DETAILS_ENDPOINT =
+  "https://open-im.api.weibo.com/open/crowd/topic_details";
+const DEFAULT_CROWD_TIMELINE_ENDPOINT = "https://open-im.api.weibo.com/open/crowd/timeline";
+const DEFAULT_CROWD_POST_ENDPOINT = "https://open-im.api.weibo.com/open/crowd/post";
+const DEFAULT_CROWD_COMMENT_ENDPOINT = "https://open-im.api.weibo.com/open/crowd/comment";
+const DEFAULT_CROWD_REPLY_ENDPOINT = "https://open-im.api.weibo.com/open/crowd/comment/reply";
 const DEFAULT_CROWD_COMMENTS_ENDPOINT =
-  "http://open-im.api.weibo.com/open/crowd/comment/tree/root_child";
+  "https://open-im.api.weibo.com/open/crowd/comment/tree/root_child";
 const DEFAULT_CROWD_CHILD_COMMENTS_ENDPOINT =
-  "http://open-im.api.weibo.com/open/crowd/comment/tree/child";
+  "https://open-im.api.weibo.com/open/crowd/comment/tree/child";
 
 function readBooleanEnv(name: string, defaultValue: boolean): boolean {
   const raw = process.env[name];
@@ -52,7 +53,8 @@ export function loadConfig(): WeiboServerConfig {
     crowdTopicNamesEndpoint:
       process.env.WEIBO_CROWD_TOPIC_NAMES_ENDPOINT?.trim() || DEFAULT_CROWD_TOPIC_NAMES_ENDPOINT,
     crowdTopicDetailsEndpoint:
-      process.env.WEIBO_CROWD_TOPIC_DETAILS_ENDPOINT?.trim() || DEFAULT_CROWD_TOPIC_DETAILS_ENDPOINT,
+      process.env.WEIBO_CROWD_TOPIC_DETAILS_ENDPOINT?.trim() ||
+      DEFAULT_CROWD_TOPIC_DETAILS_ENDPOINT,
     crowdTimelineEndpoint:
       process.env.WEIBO_CROWD_TIMELINE_ENDPOINT?.trim() || DEFAULT_CROWD_TIMELINE_ENDPOINT,
     crowdPostEndpoint: process.env.WEIBO_CROWD_POST_ENDPOINT?.trim() || DEFAULT_CROWD_POST_ENDPOINT,
