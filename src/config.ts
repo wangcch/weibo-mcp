@@ -6,6 +6,7 @@ const DEFAULT_SEARCH_ENDPOINT = "http://open-im.api.weibo.com/open/wis/search_qu
 const DEFAULT_STATUS_ENDPOINT = "http://open-im.api.weibo.com/open/weibo/user_status";
 const DEFAULT_HOT_SEARCH_ENDPOINT = "http://open-im.api.weibo.com/open/weibo/hot_search";
 const DEFAULT_CROWD_TOPIC_NAMES_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/topic_names";
+const DEFAULT_CROWD_TOPIC_DETAILS_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/topic_details";
 const DEFAULT_CROWD_TIMELINE_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/timeline";
 const DEFAULT_CROWD_POST_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/post";
 const DEFAULT_CROWD_COMMENT_ENDPOINT = "http://open-im.api.weibo.com/open/crowd/comment";
@@ -50,6 +51,8 @@ export function loadConfig(): WeiboServerConfig {
     hotSearchEndpoint: process.env.WEIBO_HOT_SEARCH_ENDPOINT?.trim() || DEFAULT_HOT_SEARCH_ENDPOINT,
     crowdTopicNamesEndpoint:
       process.env.WEIBO_CROWD_TOPIC_NAMES_ENDPOINT?.trim() || DEFAULT_CROWD_TOPIC_NAMES_ENDPOINT,
+    crowdTopicDetailsEndpoint:
+      process.env.WEIBO_CROWD_TOPIC_DETAILS_ENDPOINT?.trim() || DEFAULT_CROWD_TOPIC_DETAILS_ENDPOINT,
     crowdTimelineEndpoint:
       process.env.WEIBO_CROWD_TIMELINE_ENDPOINT?.trim() || DEFAULT_CROWD_TIMELINE_ENDPOINT,
     crowdPostEndpoint: process.env.WEIBO_CROWD_POST_ENDPOINT?.trim() || DEFAULT_CROWD_POST_ENDPOINT,

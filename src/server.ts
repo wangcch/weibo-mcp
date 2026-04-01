@@ -125,11 +125,12 @@ export function createServer(): McpServer {
       {
         title: "Weibo Crowd",
         description:
-          "Weibo crowd operations. Read-only actions: topics, timeline, comments, child-comments. Write actions: post, comment, reply. Utility: refresh.",
+          "Weibo crowd operations. Read-only actions: topics, topic-details, timeline, comments, child-comments. Write actions: post, comment, reply. Utility: refresh.",
         inputSchema: {
           action: z
             .enum([
               "topics",
+              "topic-details",
               "timeline",
               "post",
               "comment",
@@ -145,6 +146,8 @@ export function createServer(): McpServer {
           cid: z.string().optional().describe("Comment ID for reply"),
           comment: z.string().optional().describe("Comment or reply text"),
           model: z.string().optional().describe("AI model name"),
+          tagId: z.string().optional().describe("Tag ID used to post into a specific section"),
+          mediaId: z.string().optional().describe("Uploaded video media ID for video posts"),
           page: z.number().int().min(1).optional(),
           count: z.number().int().min(1).max(200).optional(),
           sinceId: z.string().optional(),
@@ -176,6 +179,10 @@ export function createServer(): McpServer {
             const result = await client.crowdTopicNames();
             return toTextResult(result);
           }
+          case "topic-details": {
+            const result = await client.crowdTopicDetails();
+            return toTextResult(result);
+          }
           case "timeline": {
             if (!params.topic) {
               throw new Error("topic is required when action=timeline");
@@ -198,6 +205,8 @@ export function createServer(): McpServer {
               topicName: params.topic,
               status: params.status,
               aiModelName: params.model,
+              tagId: params.tagId,
+              mediaId: params.mediaId,
             });
             return toTextResult(result);
           }

@@ -198,6 +198,23 @@ export class WeiboApiClient {
     return await response.json();
   }
 
+  async crowdTopicDetails(): Promise<unknown> {
+    const token = (await this.getToken()).token;
+    const url = new URL(this.config.crowdTopicDetailsEndpoint);
+    url.searchParams.set("token", token);
+
+    const response = await fetch(url.toString(), { method: "GET" });
+    if (!response.ok) {
+      const text = await response.text().catch(() => "");
+      throw new Error(
+        `Get crowd topic details failed: ${response.status} ${response.statusText}${
+          text ? ` - ${text}` : ""
+        }`,
+      );
+    }
+    return await response.json();
+  }
+
   async crowdTimeline(params: {
     topicName: string;
     page?: number;
@@ -242,6 +259,8 @@ export class WeiboApiClient {
     topicName: string;
     status: string;
     aiModelName?: string;
+    tagId?: string;
+    mediaId?: string;
   }): Promise<unknown> {
     const token = (await this.getToken()).token;
     const url = new URL(this.config.crowdPostEndpoint);
@@ -253,6 +272,12 @@ export class WeiboApiClient {
     };
     if (params.aiModelName) {
       body.ai_model_name = params.aiModelName;
+    }
+    if (params.tagId) {
+      body.tag_id = params.tagId;
+    }
+    if (params.mediaId) {
+      body.media_id = params.mediaId;
     }
 
     const response = await fetch(url.toString(), {

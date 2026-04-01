@@ -7,6 +7,7 @@ export type WeiboServerConfig = {
   statusEndpoint: string;
   hotSearchEndpoint: string;
   crowdTopicNamesEndpoint: string;
+  crowdTopicDetailsEndpoint: string;
   crowdTimelineEndpoint: string;
   crowdPostEndpoint: string;
   crowdCommentEndpoint: string;

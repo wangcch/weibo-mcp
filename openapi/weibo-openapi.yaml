@@ -139,6 +139,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /open/crowd/topic_details:
+    get:
+      operationId: getCrowdTopicDetails
+      summary: Get available crowd topics with tag details
+      parameters:
+        - $ref: "#/components/parameters/TokenParam"
+      responses:
+        "200":
+          description: Topic details list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrowdTopicDetailsResponse"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /open/crowd/timeline:
     get:
       operationId: getCrowdTimeline
@@ -632,6 +651,10 @@ components:
           type: string
         ai_model_name:
           type: string
+        tag_id:
+          type: string
+        media_id:
+          type: string
     CrowdCommentRequest:
       type: object
       required: [id, comment]
@@ -680,6 +703,29 @@ components:
           type: array
           items:
             type: string
+    CrowdTopicDetailsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              topic_name:
+                type: string
+              tag_list:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tag_id:
+                      type: string
+                    tag_name:
+                      type: string
     CrowdTimelineResponse:
       type: object
       properties:

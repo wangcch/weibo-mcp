@@ -157,16 +157,22 @@ npx weibo-mcp
 
 ### `weibo_crowd` 操作
 
-| Action           | 说明                 | 类型    |
-| ---------------- | -------------------- | ------- |
-| `topics`         | 获取可用圈子话题列表 | 🔍 只读 |
-| `timeline`       | 浏览话题时间线       | 🔍 只读 |
-| `comments`       | 获取微博的根评论     | 🔍 只读 |
-| `child-comments` | 获取评论的回复列表   | 🔍 只读 |
-| `post`           | 在话题下发布新微博   | ✏️ 写入 |
-| `comment`        | 评论一条微博         | ✏️ 写入 |
-| `reply`          | 回复一条评论         | ✏️ 写入 |
-| `refresh`        | 强制刷新 Token       | ✏️ 写入 |
+| Action           | 说明                               | 类型    |
+| ---------------- | ---------------------------------- | ------- |
+| `topics`         | 获取可用圈子话题列表               | 🔍 只读 |
+| `topic-details`  | 获取可用圈子话题详情（含版块信息） | 🔍 只读 |
+| `timeline`       | 浏览话题时间线                     | 🔍 只读 |
+| `comments`       | 获取微博的根评论                   | 🔍 只读 |
+| `child-comments` | 获取评论的回复列表                 | 🔍 只读 |
+| `post`           | 在话题下发布新微博                 | ✏️ 写入 |
+| `comment`        | 评论一条微博                       | ✏️ 写入 |
+| `reply`          | 回复一条评论                       | ✏️ 写入 |
+| `refresh`        | 强制刷新 Token                     | ✏️ 写入 |
+
+`weibo_crowd` 的 `post` 支持可选参数：
+
+- `tagId`：发帖版块 ID（可通过 `topic-details` 返回的 `tag_list` 获取）
+- `mediaId`：视频媒体 ID（用于发视频帖子）
 
 ## 配置项
 
@@ -204,6 +210,7 @@ npx weibo-mcp
 | `WEIBO_STATUS_ENDPOINT`               | `http://open-im.api.weibo.com/open/weibo/user_status`             |
 | `WEIBO_HOT_SEARCH_ENDPOINT`           | `http://open-im.api.weibo.com/open/weibo/hot_search`              |
 | `WEIBO_CROWD_TOPIC_NAMES_ENDPOINT`    | `http://open-im.api.weibo.com/open/crowd/topic_names`             |
+| `WEIBO_CROWD_TOPIC_DETAILS_ENDPOINT`  | `http://open-im.api.weibo.com/open/crowd/topic_details`           |
 | `WEIBO_CROWD_TIMELINE_ENDPOINT`       | `http://open-im.api.weibo.com/open/crowd/timeline`                |
 | `WEIBO_CROWD_POST_ENDPOINT`           | `http://open-im.api.weibo.com/open/crowd/post`                    |
 | `WEIBO_CROWD_COMMENT_ENDPOINT`        | `http://open-im.api.weibo.com/open/crowd/comment`                 |
@@ -232,7 +239,7 @@ npm run build
 
 ## API 参考
 
-本项目包含完整的 OpenAPI 3.1.0 规范文件，覆盖所有 12 个微博 HTTP 接口：
+本项目包含完整的 OpenAPI 3.1.0 规范文件，覆盖所有 13 个微博 HTTP 接口：
 
 - `openapi/weibo-openapi.yaml`
 
