@@ -19,7 +19,7 @@
 ### 前置条件
 
 - Node.js >= 18
-- 微博开放 API 的 `app_id` 和 `app_secret`（[获取方式](#获取凭证)）
+- 微博开放 API 的 `app_id` 和 `app_secret`
 
 ### 获取凭证
 
@@ -235,6 +235,8 @@ npm run build
 本项目包含完整的 OpenAPI 3.1.0 规范文件，覆盖所有 12 个微博 HTTP 接口：
 
 - `openapi/weibo-openapi.yaml`
+
+API 接口来源于 [openclaw-weibo](https://github.com/wecode-ai/openclaw-weibo) 项目，`weibo-openapi.yaml` 为据此整理的 OpenAPI 规范。
 
 ## 许可证
 
