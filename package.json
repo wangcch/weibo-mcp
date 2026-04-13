@@ -1,6 +1,6 @@
 {
   "name": "weibo-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server for Weibo open APIs (token, search, user status, hot search, crowd).",
   "type": "module",
   "main": "dist/index.js",
